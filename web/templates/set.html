@@ -1,0 +1,40 @@
+<script src="{{ url_for('static', filename='includes/jquery/js/jquery-3.4.1.js') }}"></script>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='includes/bootstrap-3.3.7/css/bootstrap.min.css') }}">
+<script src="{{ url_for('static', filename='includes/bootstrap-3.3.7/js/bootstrap.min.js') }}"></script>
+
+
+<link rel="stylesheet" href="{{ url_for('static', filename='themes/default/default.css') }}">
+
+<html>
+    <head>
+
+    </head>
+    <body class="theme-panelContainer">
+      <div class="container-fluid theme-panelContainer">
+        Expiry:<br>
+        <input type='text' value="0" class="inputFullWidth theme-panelTextbox" id='expiry'><br>
+        Message:<br>
+        <textarea id="message" class="inputFullWidth theme-panelTextArea" style="height: 150px;"></textarea></br>
+        <button id="run" class="btn btn-primary theme-panelButton">Generate URL</button></br>
+        <br>
+        <br>
+        Output:<br>
+        <label id="output"></label>
+      </div>
+    </body>
+</html>
+
+<script>
+  var CSRF = "{{CSRF}}"
+</script>
+
+<script>
+  $("#run").click(function () {
+    $.ajax({url: "", type:"POST", data:JSON.stringify({ message: $('#message').val(), expiry: $('#expiry').val(), CSRF: CSRF }), contentType:"application/json", success: function(result) {
+        var url = window.location.href
+        $('#output').text(url+result["uri"])
+      } 
+    });
+  });
+</script>
