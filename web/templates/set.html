@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='includes/bootstrap-3.3.7/css/bootstrap.min.css') }}">
 <script src="{{ url_for('static', filename='includes/bootstrap-3.3.7/js/bootstrap.min.js') }}"></script>
 
-
+<link rel="stylesheet" href="{{ url_for('static', filename='css/objectProperties.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='themes/default/default.css') }}">
 
 <html>
@@ -13,9 +13,9 @@
     <body class="theme-panelContainer">
       <div class="container-fluid theme-panelContainer">
         Expiry:<br>
-        <input type='text' value="0" class="inputFullWidth theme-panelTextbox" id='expiry'><br>
+        <input type='text' value="86400" class="inputFullWidth theme-panelTextbox" id='expiry'><br>
         Message:<br>
-        <textarea id="message" class="inputFullWidth theme-panelTextArea" style="height: 150px;"></textarea></br>
+        <textarea id="message" class="inputFullWidth theme-panelTextArea" style="height: 60%"></textarea></br></br>
         <button id="run" class="btn btn-primary theme-panelButton">Generate URL</button></br>
         <br>
         <br>
