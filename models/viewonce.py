@@ -79,6 +79,7 @@ class _viewonce(db._document):
             cipher.verify(tag)
             # Remove entry from DB when access count is below 1
             self.accessCount -= 1
+            self.update(["accessCount"])
             if self.accessCount < 1:
                 self.delete()
             return data
