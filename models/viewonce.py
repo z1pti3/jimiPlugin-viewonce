@@ -19,12 +19,15 @@ class _viewonce(db._document):
     tag = str()
     nonce = str()
     expiry = int()
+    accessCount = int()
 
     _dbCollection = db.db["viewonce"]
 
-    def new(self, data, expiry=0):
+    def new(self, data, expiry=0, accessCount=1):
         token, returnData = self.setData(data)
-        self.expiry = time.time() + expiry
+        if expiry > 0:
+            self.expiry = time.time() + expiry
+        self.accessCount = accessCount
         super(_viewonce, self).new()
         return ( str(self._id), token, returnData)
         
@@ -74,8 +77,10 @@ class _viewonce(db._document):
         data = cipher.decrypt(data).decode()
         try:
             cipher.verify(tag)
-            # Remove entry from DB
-            self.delete()
+            # Remove entry from DB when access count is below 1
+            self.accessCount -= 1
+            if self.accessCount < 1:
+                self.delete()
             return data
         except ValueError:
             return None

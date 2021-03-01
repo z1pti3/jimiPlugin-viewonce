@@ -15,8 +15,9 @@ def mainPage():
 def setViewonce():
     data = json.loads(api.request.data)
     expiry = int(data["expiry"])
+    accessCount = int(data["accessCount"])
     viewonceData = data["message"]
-    _id, token, encData = viewonce._viewonce().new(viewonceData,expiry)
+    _id, token, encData = viewonce._viewonce().new(viewonceData,expiry,accessCount)
     return { "uri" : "{0}/?token={1}&encData={2}".format(_id,urllib.parse.quote_plus(token),urllib.parse.quote_plus(encData)) }, 200
 
 @pluginPages.route("/viewonce/<viewonceID>/",methods=["GET"])

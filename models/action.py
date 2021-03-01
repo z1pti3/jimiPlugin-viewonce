@@ -8,10 +8,11 @@ from plugins.viewonce.models import viewonce
 class _viewonceSet(action._action):
     viewonceData = str()
     expiry= int()
+    accessCount = 1
 
     def run(self,data,persistentData,actionResult):
         viewonceData = helpers.evalString(self.viewonceData,{"data" : data})
-        _id, token, encData = viewonce._viewonce().new(viewonceData,self.expiry)
+        _id, token, encData = viewonce._viewonce().new(viewonceData,self.expiry,self.accessCount)
         if _id:
             actionResult["result"] = True
             actionResult["rc"] = 0

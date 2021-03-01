@@ -14,6 +14,8 @@
       <div class="container-fluid theme-panelContainer">
         Expiry:<br>
         <input type='text' value="86400" class="inputFullWidth theme-panelTextbox" id='expiry'><br>
+        Access Count:<br>
+        <input type='text' value="1" class="inputFullWidth theme-panelTextbox" id='accessCount'><br>
         Message:<br>
         <textarea id="message" class="inputFullWidth theme-panelTextArea" style="height: 60%"></textarea></br></br>
         <button id="run" class="btn btn-primary theme-panelButton">Generate URL</button></br>
@@ -31,7 +33,7 @@
 
 <script>
   $("#run").click(function () {
-    $.ajax({url: "", type:"POST", data:JSON.stringify({ message: $('#message').val(), expiry: $('#expiry').val(), CSRF: CSRF }), contentType:"application/json", success: function(result) {
+    $.ajax({url: "", type:"POST", data:JSON.stringify({ message: $('#message').val(), expiry: $('#expiry').val(), accessCount: $('#accessCount').val(), CSRF: CSRF }), contentType:"application/json", success: function(result) {
         var url = window.location.href
         $('#output').text(url+result["uri"])
       } 
