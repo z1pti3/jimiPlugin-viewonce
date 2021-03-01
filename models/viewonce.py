@@ -33,7 +33,7 @@ class _viewonce(db._document):
         
     def setData(self,data):
         # Get Key
-        keyBytes = get_random_bytes(16)
+        keyBytes = get_random_bytes(32)
         key = hashlib.sha256(keyBytes).digest()
         # AES
         cipher = AES.new(key, AES.MODE_EAX)
