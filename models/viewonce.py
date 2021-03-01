@@ -60,28 +60,32 @@ class _viewonce(db._document):
         return base64.b64encode(encKey).decode(), returnData
 
     def getData(self,token,encData):
-        # RSA
-        cipher_rsa = PKCS1_OAEP.new(RSA.import_key(viewoncePrivateKey))
-        key = hashlib.sha256(cipher_rsa.decrypt(base64.b64decode(token.encode()))).digest()
-        # AES
-        nonce = base64.b64decode(self.nonce.encode())
-        tag = base64.b64decode(self.tag.encode())
-        encData2 = self.data
-        data = ""
-        for x in range(0,len(encData)):
-            data += encData[x]
-            data += encData2[x]
-        data = base64.b64decode(data.encode())
-        # AES
-        cipher = AES.new(key, AES.MODE_EAX, nonce = nonce)
-        data = cipher.decrypt(data).decode()
         try:
-            cipher.verify(tag)
-            # Remove entry from DB when access count is below 1
-            self.accessCount -= 1
-            self.update(["accessCount"])
-            if self.accessCount < 1:
+            # RSA
+            cipher_rsa = PKCS1_OAEP.new(RSA.import_key(viewoncePrivateKey))
+            key = hashlib.sha256(cipher_rsa.decrypt(base64.b64decode(token.encode()))).digest()
+            # AES
+            nonce = base64.b64decode(self.nonce.encode())
+            tag = base64.b64decode(self.tag.encode())
+            encData2 = self.data
+            data = ""
+            for x in range(0,len(encData)):
+                data += encData[x]
+                data += encData2[x]
+            data = base64.b64decode(data.encode())
+            # AES
+            cipher = AES.new(key, AES.MODE_EAX, nonce = nonce)
+            data = cipher.decrypt(data).decode()
+            try:
+                cipher.verify(tag)
+                # Remove entry from DB when access count is below 1
+                self.accessCount -= 1
+                self.update(["accessCount"])
+                if self.accessCount < 1:
+                    self.delete()
+                return data
+            except ValueError:
                 self.delete()
-            return data
-        except ValueError:
-            return None
+                return None
+        except:
+            self.delete()
