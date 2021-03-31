@@ -7,11 +7,11 @@ from plugins.viewonce.models import viewonce
 
 pluginPages = Blueprint('viewoncePages', __name__, template_folder="templates")
 
-@pluginPages.route("/viewonce/",methods=["GET"])
+@pluginPages.route("/",methods=["GET"])
 def mainPage():
     return render_template("set.html", CSRF=api.g.sessionData["CSRF"])
 
-@pluginPages.route("/viewonce/",methods=["POST"])
+@pluginPages.route("/",methods=["POST"])
 def setViewonce():
     data = json.loads(api.request.data)
     expiry = int(data["expiry"])
@@ -20,7 +20,7 @@ def setViewonce():
     _id, token, encData = viewonce._viewonce().new(viewonceData,expiry,accessCount)
     return { "uri" : "{0}/?token={1}&encData={2}".format(_id,urllib.parse.quote_plus(token),urllib.parse.quote_plus(encData)) }, 200
 
-@pluginPages.route("/viewonce/<viewonceID>/",methods=["GET"])
+@pluginPages.route("/<viewonceID>/",methods=["GET"])
 def __PUBLIC__getViewonce(viewonceID):
     viewonceItem =  viewonce._viewonce().getAsClass(id=viewonceID)
     if len(viewonceItem) == 1:
