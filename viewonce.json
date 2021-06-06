@@ -1,0 +1,227 @@
+{
+   "name": "viewonce",
+   "author": "z1p",
+   "version": 0.1,
+   "categories": [],
+   "description": "",
+   "icon": null,
+   "requirements": {
+      "jimi_min_version": null,
+      "jimi_max_version": null,
+      "plugins": []
+   },
+   "collections": {
+      "viewonce": {
+         "display_name": "viewonce",
+         "className": "_viewonce",
+         "class_location": "models.viewonce",
+         "description": "",
+         "fields": [
+            {
+               "schema_item": "data",
+               "schema_value": "data",
+               "type": "input",
+               "label": "data",
+               "description": ""
+            },
+            {
+               "schema_item": "tag",
+               "schema_value": "tag",
+               "type": "input",
+               "label": "tag",
+               "description": ""
+            },
+            {
+               "schema_item": "nonce",
+               "schema_value": "nonce",
+               "type": "input",
+               "label": "nonce",
+               "description": ""
+            },
+            {
+               "schema_item": "expiry",
+               "schema_value": "expiry",
+               "type": "input",
+               "label": "expiry",
+               "description": ""
+            },
+            {
+               "schema_item": "accessCount",
+               "schema_value": "accessCount",
+               "type": "input",
+               "label": "accessCount",
+               "description": ""
+            }
+         ],
+         "data_out": {
+            "result": {
+               "description": "Returns True when successful.",
+               "type": "boolean",
+               "always_present": true,
+               "values": {
+                  "True": {
+                     "description": "Successful."
+                  },
+                  "False": {
+                     "description": "Failure."
+                  }
+               }
+            },
+            "rc": {
+               "description": "Returns the exit code for the action.",
+               "type": "number",
+               "always_present": true,
+               "values": {
+                  "0": {
+                     "description": "Successful."
+                  }
+               }
+            }
+         }
+      }
+   },
+   "triggers": {},
+   "actions": {
+      "viewonceSet": {
+         "display_name": "viewonceSet",
+         "className": "_viewonceSet",
+         "class_location": "models.action",
+         "description": "",
+         "fields": [
+            {
+               "schema_item": "viewonceData",
+               "schema_value": "viewonceData",
+               "type": "input",
+               "label": "viewonceData",
+               "description": ""
+            },
+            {
+               "schema_item": "expiry",
+               "schema_value": "expiry",
+               "type": "input",
+               "label": "expiry",
+               "description": ""
+            },
+            {
+               "schema_item": "accessCount",
+               "schema_value": "accessCount",
+               "type": "input",
+               "label": "accessCount",
+               "description": ""
+            }
+         ],
+         "data_out": {
+            "result": {
+               "description": "Returns True when successful.",
+               "type": "boolean",
+               "always_present": true,
+               "values": {
+                  "True": {
+                     "description": "Successful."
+                  },
+                  "False": {
+                     "description": "Failure."
+                  }
+               }
+            },
+            "rc": {
+               "description": "Returns the exit code for the action.",
+               "type": "number",
+               "always_present": true,
+               "values": {
+                  "0": {
+                     "description": "Successful."
+                  }
+               }
+            }
+         }
+      },
+      "viewonceGet": {
+         "display_name": "viewonceGet",
+         "className": "_viewonceGet",
+         "class_location": "models.action",
+         "description": "",
+         "fields": [
+            {
+               "schema_item": "viewonceID",
+               "schema_value": "viewonceID",
+               "type": "input",
+               "label": "viewonceID",
+               "description": ""
+            },
+            {
+               "schema_item": "token",
+               "schema_value": "token",
+               "type": "input",
+               "label": "token",
+               "description": ""
+            },
+            {
+               "schema_item": "encData",
+               "schema_value": "encData",
+               "type": "input",
+               "label": "encData",
+               "description": ""
+            }
+         ],
+         "data_out": {
+            "result": {
+               "description": "Returns True when successful.",
+               "type": "boolean",
+               "always_present": true,
+               "values": {
+                  "True": {
+                     "description": "Successful."
+                  },
+                  "False": {
+                     "description": "Failure."
+                  }
+               }
+            },
+            "rc": {
+               "description": "Returns the exit code for the action.",
+               "type": "number",
+               "always_present": true,
+               "values": {
+                  "0": {
+                     "description": "Successful."
+                  }
+               }
+            }
+         }
+      },
+      "viewonceCleanup": {
+         "display_name": "viewonceCleanup",
+         "className": "_viewonceCleanup",
+         "class_location": "models.action",
+         "description": "",
+         "fields": [],
+         "data_out": {
+            "result": {
+               "description": "Returns True when successful.",
+               "type": "boolean",
+               "always_present": true,
+               "values": {
+                  "True": {
+                     "description": "Successful."
+                  },
+                  "False": {
+                     "description": "Failure."
+                  }
+               }
+            },
+            "rc": {
+               "description": "Returns the exit code for the action.",
+               "type": "number",
+               "always_present": true,
+               "values": {
+                  "0": {
+                     "description": "Successful."
+                  }
+               }
+            }
+         }
+      }
+   },
+   "settings": {}
+}
